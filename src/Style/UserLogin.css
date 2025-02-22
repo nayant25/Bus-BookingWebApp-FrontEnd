@@ -1,4 +1,4 @@
-.admin-login-container {
+.user-login-container {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -87,7 +87,7 @@
 .message {
     margin: 15px 0;
     font-size: 14px;
-    color: #e74c3c; /* Red for errors, adjust for success */
+    color: #e74c3c;
 }
 
 .signup-link {

@@ -1,14 +1,15 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Dropdown from 'react-bootstrap/Dropdown';
-import '../Style/AdminNavbar.css';
+import '../Style/UserNavbar.css';
 
-const AdminNavbar = () => {
+const UserNavbar = () => {
     const navigate = useNavigate();
 
     const handleLogout = () => {
-        localStorage.removeItem("adminName");
-        navigate("/adminlogin");
+        localStorage.removeItem("userId");
+        localStorage.removeItem("userName");
+        navigate("/userlogin");
     };
 
     return (
@@ -21,19 +22,17 @@ const AdminNavbar = () => {
                 />
             </div>
             <div className="nav-links">
-                <Link to="/adminhomepage" className="nav-link">Dashboard</Link>
-                <Link to="/adminhomepage/addbus" className="nav-link">Add Bus</Link>
-                <Link to="/adminhomepage/viewbus" className="nav-link">View Buses</Link>
+                <Link to="/userhomepage" className="nav-link">Dashboard</Link>
+                <Link to="/ticket-booking" className="nav-link">Book Tickets</Link>
             </div>
             <div className="account">
                 <Dropdown>
                     <Dropdown.Toggle variant="success" id="dropdown-basic">
-                        Admin Menu
+                        User Menu
                     </Dropdown.Toggle>
                     <Dropdown.Menu>
-                        <Dropdown.Item onClick={() => navigate("/adminhomepage")}>Dashboard</Dropdown.Item>
-                        <Dropdown.Item onClick={() => navigate("/adminhomepage/addbus")}>Add Bus</Dropdown.Item>
-                        <Dropdown.Item onClick={() => navigate("/adminhomepage/viewbus")}>View Buses</Dropdown.Item>
+                        <Dropdown.Item onClick={() => navigate("/userhomepage")}>Dashboard</Dropdown.Item>
+                        <Dropdown.Item onClick={() => navigate("/ticket-booking")}>Book Tickets</Dropdown.Item>
                         <Dropdown.Item onClick={handleLogout}>Logout</Dropdown.Item>
                     </Dropdown.Menu>
                 </Dropdown>
@@ -42,4 +41,4 @@ const AdminNavbar = () => {
     );
 };
 
-export default AdminNavbar;
+export default UserNavbar;

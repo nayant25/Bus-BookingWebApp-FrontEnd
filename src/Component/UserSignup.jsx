@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useState } from 'react';
-import '../Style/UserSignup.css'
+import '../Style/UserSignup.css';
 
 const UserSignup = () => {
     const [name, setName] = useState("");
@@ -10,26 +10,32 @@ const UserSignup = () => {
     const [age, setAge] = useState("");
     const [password, setPassword] = useState("");
 
-    let data={
-        name,phone,email,gender,age,password
-    }
+    function createUser(e) {
+        e.preventDefault();
+        const data = { name, phone, email, gender, age, password };
 
-    function createUser(e){
-        e.preventDefault()
-        axios.post('http://localhost:8080/api/users',data)
-        .then((res)=>{
-            alert("User Added Succesfully")
-            console.log(res);
+        axios.post('http://localhost:8080/api/users', data, {
+            headers: { "Content-Type": "application/json" }
         })
-        .catch((err)=>{
-            alert("User Signup Failed")
-            console.log(err);
+        .then((res) => {
+            alert("User Added Successfully");
+            const userId = res.data.data?.id; // Adjust based on actual response structure
+            if (userId) {
+                localStorage.setItem("userId", userId);
+                localStorage.setItem("userName", name);
+            }
+            console.log("Signup Response:", res.data);
         })
+        .catch((err) => {
+            alert("User Signup Failed: " + (err.response?.data?.message || err.message));
+            console.log("Signup Error:", err);
+        });
     }
 
     return (
         <div className="usersignup">
             <form onSubmit={createUser}>
+                {/* Form fields remain unchanged */}
                 <label htmlFor="name">Name</label>
                 <input
                     type="text"
